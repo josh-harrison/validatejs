@@ -176,7 +176,7 @@ export class Model {
   constructor() {
     this.validator = new Validator(this)
       .ensure('age')
-        .length({ onlyInteger: true, lessThan: 115, greaterThan: 0 });
+        .numericality({ onlyInteger: true, lessThan: 115, greaterThan: 0 });
   }
 }
 ```
