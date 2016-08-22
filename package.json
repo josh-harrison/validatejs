@@ -21,20 +21,14 @@
   },
   "jspm": {
     "registry": "npm",
-    "jspmPackage": true,
     "main": "aurelia-validatejs",
     "format": "amd",
     "directories": {
       "dist": "dist/amd"
     },
-    "peerDependencies": {
-      "aurelia-metadata": "^1.0.0-rc.1.0.0",
-      "aurelia-validation": "^0.10.0",
-      "validate.js": "^0.10.0"
-    },
     "dependencies": {
       "aurelia-metadata": "^1.0.0-rc.1.0.0",
-      "aurelia-validation": "^0.10.0",
+      "aurelia-validation": "^0.11.0",
       "validate.js": "^0.10.0"
     },
     "devDependencies": {
@@ -46,7 +40,7 @@
   },
   "dependencies": {
     "aurelia-metadata": "^1.0.0-rc.1.0.0",
-    "aurelia-validation": "^0.10.0",
+    "aurelia-validation": "^0.11.0",
     "validate.js": "^0.10.0"
   },
   "devDependencies": {
