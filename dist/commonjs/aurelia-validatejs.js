@@ -338,5 +338,5 @@ var Validator = exports.Validator = function () {
 
 function configure(config) {
   debugger;
-  config.container.registerInstance(ValidatorInterface, new Validator());
+  config.container.registerInstance(_aureliaValidation.Validator, new Validator());
 }

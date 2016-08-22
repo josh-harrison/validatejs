@@ -2,7 +2,8 @@ import {
   metadata
 } from 'aurelia-metadata';
 import {
-  ValidationError
+  ValidationError,
+  Validator as ValidatorInterface
 } from 'aurelia-validation';
 import validate from 'validate.js';
 export declare const metadataKey: any;
