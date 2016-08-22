@@ -3,7 +3,7 @@
 System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], function (_export, _context) {
   "use strict";
 
-  var metadata, ValidationError, ValidatorInterface, validate, metadataKey, ValidationRule, ValidationRules, Validator;
+  var metadata, ValidationError, validate, metadataKey, ValidationRule, ValidationRules, Validator;
 
   
 
@@ -133,7 +133,6 @@ System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], funct
       metadata = _aureliaMetadata.metadata;
     }, function (_aureliaValidation) {
       ValidationError = _aureliaValidation.ValidationError;
-      ValidatorInterface = _aureliaValidation.Validator;
     }, function (_validateJs) {
       validate = _validateJs.default;
     }],
