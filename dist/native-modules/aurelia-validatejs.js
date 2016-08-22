@@ -309,5 +309,6 @@ export var Validator = function () {
 }();
 
 export function configure(config) {
+  debugger;
   config.container.registerInstance(ValidatorInterface, new Validator());
 }

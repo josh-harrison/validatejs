@@ -336,6 +336,7 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
   }();
 
   function configure(config) {
+    debugger;
     config.container.registerInstance(_aureliaValidation.Validator, new Validator());
   }
 });
