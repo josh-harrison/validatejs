@@ -34,11 +34,10 @@ export class Validator {
   }
 
   validateObject(object, rules = null) {
-
-    return this._validate(object, null, rules);
+    return this._validateComplex(object, rules);
   }
 
-  validateComplex(object, validator) {
+  _validateComplex(object, validator) {
     const result = validate(object, validator);
     if (result) {
         errors.push(new ValidationError(null, result[propertyName][0], object));
