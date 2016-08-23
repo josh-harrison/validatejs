@@ -38,6 +38,7 @@ export class Validator {
   }
 
   _validateComplex(object, validator) {
+    const errors = [];
     const result = validate(object, validator);
     if (result) {
         errors.push(new ValidationError(null, result[0], object));

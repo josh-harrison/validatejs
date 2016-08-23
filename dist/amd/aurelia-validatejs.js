@@ -333,6 +333,7 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
     };
 
     Validator.prototype._validateComplex = function _validateComplex(object, validator) {
+      var errors = [];
       var result = (0, _validate3.default)(object, validator);
       if (result) {
         errors.push(new _aureliaValidation.ValidationError(null, result[0], object));
