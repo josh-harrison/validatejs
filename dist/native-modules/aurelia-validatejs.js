@@ -308,7 +308,7 @@ export var Validator = function () {
   Validator.prototype._validateComplex = function _validateComplex(object, validator) {
     var result = validate(object, validator);
     if (result) {
-      errors.push(new ValidationError(null, result[propertyName][0], object));
+      errors.push(new ValidationError(null, result[0], object));
     }
   };
 

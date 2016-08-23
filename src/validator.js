@@ -40,7 +40,7 @@ export class Validator {
   _validateComplex(object, validator) {
     const result = validate(object, validator);
     if (result) {
-        errors.push(new ValidationError(null, result[propertyName][0], object));
+        errors.push(new ValidationError(null, result[0], object));
     }
   }
 }
