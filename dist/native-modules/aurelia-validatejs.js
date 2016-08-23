@@ -302,7 +302,15 @@ export var Validator = function () {
   Validator.prototype.validateObject = function validateObject(object) {
     var rules = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
+
     return this._validate(object, null, rules);
+  };
+
+  Validator.prototype.validateComplex = function validateComplex(object, validator) {
+    var result = validate(object, validator);
+    if (result) {
+      errors.push(new ValidationError(null, result[propertyName][0], object));
+    }
   };
 
   return Validator;

@@ -61,5 +61,6 @@ export declare function numericality(targetOrConfig?: any, key?: any, descriptor
 export declare class Validator {
   validateProperty(object?: any, propertyName?: any, rules?: any): any;
   validateObject(object?: any, rules?: any): any;
+  validateComplex(object?: any, validator?: any): any;
 }
 export declare function configure(config?: any): any;

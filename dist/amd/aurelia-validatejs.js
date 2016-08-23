@@ -329,7 +329,15 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
     Validator.prototype.validateObject = function validateObject(object) {
       var rules = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
+
       return this._validate(object, null, rules);
+    };
+
+    Validator.prototype.validateComplex = function validateComplex(object, validator) {
+      var result = (0, _validate3.default)(object, validator);
+      if (result) {
+        errors.push(new _aureliaValidation.ValidationError(null, result[propertyName][0], object));
+      }
     };
 
     return Validator;
