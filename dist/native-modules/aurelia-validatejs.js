@@ -309,8 +309,9 @@ export var Validator = function () {
     var errors = [];
     var result = validate(object, validator);
     if (result) {
-      errors.push(new ValidationError(null, result[0], object));
+      errors.push(new ValidationError(null, result[object.key][0], object));
     }
+    return errors;
   };
 
   return Validator;

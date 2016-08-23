@@ -247,8 +247,9 @@ export let Validator = class Validator {
     const errors = [];
     const result = validate(object, validator);
     if (result) {
-      errors.push(new ValidationError(null, result[0], object));
+      errors.push(new ValidationError(null, result[object.key][0], object));
     }
+    return errors;
   }
 };
 

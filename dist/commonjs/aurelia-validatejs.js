@@ -337,8 +337,9 @@ var Validator = exports.Validator = function () {
     var errors = [];
     var result = (0, _validate3.default)(object, validator);
     if (result) {
-      errors.push(new _aureliaValidation.ValidationError(null, result[0], object));
+      errors.push(new _aureliaValidation.ValidationError(null, result[object.key][0], object));
     }
+    return errors;
   };
 
   return Validator;
