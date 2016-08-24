@@ -1,5 +1,6 @@
 
 
+import moment from 'moment';
 import { metadata } from 'aurelia-metadata';
 import { ValidationError, Validator as ValidatorInterface } from 'aurelia-validation';
 
@@ -255,10 +256,19 @@ export function numericality(targetOrConfig, key, descriptor) {
 }
 
 import validate from 'validate.js';
-
 export var Validator = function () {
   function Validator() {
     
+
+    validate.extend(validate.validators.datetime, {
+      parse: function parse(value, options) {
+        return +moment.utc(value);
+      },
+      format: function format(value, options) {
+        var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+        return moment.utc(value).format(format);
+      }
+    });
   }
 
   Validator.prototype._validate = function _validate(object) {
@@ -309,7 +319,7 @@ export var Validator = function () {
     var errors = [];
     var result = validate(object, validator);
     if (result) {
-      errors.push(new ValidationError(null, result[object.key][0], object));
+      errors.push(new ValidationError(null, result[object.propertyName][0], object));
     }
     return errors;
   };
@@ -318,6 +328,5 @@ export var Validator = function () {
 }();
 
 export function configure(config) {
-  debugger;
   config.container.registerInstance(ValidatorInterface, new Validator());
 }

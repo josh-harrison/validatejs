@@ -21,6 +21,10 @@ exports.url = url;
 exports.numericality = numericality;
 exports.configure = configure;
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 var _aureliaMetadata = require('aurelia-metadata');
 
 var _aureliaValidation = require('aurelia-validation');
@@ -287,6 +291,16 @@ function numericality(targetOrConfig, key, descriptor) {
 var Validator = exports.Validator = function () {
   function Validator() {
     
+
+    _validate3.default.extend(_validate3.default.validators.datetime, {
+      parse: function parse(value, options) {
+        return +_moment2.default.utc(value);
+      },
+      format: function format(value, options) {
+        var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+        return _moment2.default.utc(value).format(format);
+      }
+    });
   }
 
   Validator.prototype._validate = function _validate(object) {
@@ -337,7 +351,7 @@ var Validator = exports.Validator = function () {
     var errors = [];
     var result = (0, _validate3.default)(object, validator);
     if (result) {
-      errors.push(new _aureliaValidation.ValidationError(null, result[object.key][0], object));
+      errors.push(new _aureliaValidation.ValidationError(null, result[object.propertyName][0], object));
     }
     return errors;
   };
@@ -346,6 +360,5 @@ var Validator = exports.Validator = function () {
 }();
 
 function configure(config) {
-  debugger;
   config.container.registerInstance(_aureliaValidation.Validator, new Validator());
 }

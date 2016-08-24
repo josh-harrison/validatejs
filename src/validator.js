@@ -2,8 +2,20 @@ import {metadata} from 'aurelia-metadata';
 import {ValidationError} from 'aurelia-validation';
 import {metadataKey} from './metadata-key';
 import validate from 'validate.js';
+import moment from 'moment';
 
 export class Validator {
+  constructor() {
+    validate.extend(validate.validators.datetime, {
+      parse: function(value, options) {
+        return +moment.utc(value);
+      },
+      format: function(value, options) {
+        var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+        return moment.utc(value).format(format);
+      }
+    });
+  }
   _validate(object, propertyName = null, rules = null) {
     const errors = [];
     if (!rules) {
@@ -41,7 +53,7 @@ export class Validator {
     const errors = [];
     const result = validate(object, validator);
     if (result) {
-        errors.push(new ValidationError(null, result[object.key][0], object));
+        errors.push(new ValidationError(null, result[object.propertyName][0], object));
     }
     return errors;
   }

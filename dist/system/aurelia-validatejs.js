@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], function (_export, _context) {
+System.register(['moment', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], function (_export, _context) {
   "use strict";
 
-  var metadata, ValidationError, ValidatorInterface, validate, metadataKey, ValidationRule, ValidationRules, Validator;
+  var moment, metadata, ValidationError, ValidatorInterface, validate, metadataKey, ValidationRule, ValidationRules, Validator;
 
   
 
@@ -122,14 +122,15 @@ System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], funct
   _export('numericality', numericality);
 
   function configure(config) {
-    debugger;
     config.container.registerInstance(ValidatorInterface, new Validator());
   }
 
   _export('configure', configure);
 
   return {
-    setters: [function (_aureliaMetadata) {
+    setters: [function (_moment) {
+      moment = _moment.default;
+    }, function (_aureliaMetadata) {
       metadata = _aureliaMetadata.metadata;
     }, function (_aureliaValidation) {
       ValidationError = _aureliaValidation.ValidationError;
@@ -314,6 +315,16 @@ System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], funct
       _export('Validator', Validator = function () {
         function Validator() {
           
+
+          validate.extend(validate.validators.datetime, {
+            parse: function parse(value, options) {
+              return +moment.utc(value);
+            },
+            format: function format(value, options) {
+              var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+              return moment.utc(value).format(format);
+            }
+          });
         }
 
         Validator.prototype._validate = function _validate(object) {
@@ -364,7 +375,7 @@ System.register(['aurelia-metadata', 'aurelia-validation', 'validate.js'], funct
           var errors = [];
           var result = validate(object, validator);
           if (result) {
-            errors.push(new ValidationError(null, result[object.key][0], object));
+            errors.push(new ValidationError(null, result[object.propertyName][0], object));
           }
           return errors;
         };

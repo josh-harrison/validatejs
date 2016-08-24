@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   metadata
 } from 'aurelia-metadata';
@@ -59,6 +60,7 @@ export declare function format(targetOrConfig?: any, key?: any, descriptor?: any
 export declare function url(targetOrConfig?: any, key?: any, descriptor?: any): any;
 export declare function numericality(targetOrConfig?: any, key?: any, descriptor?: any): any;
 export declare class Validator {
+  constructor();
   validateProperty(object?: any, propertyName?: any, rules?: any): any;
   validateObject(object?: any, rules?: any): any;
 }

@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], function (exports, _aureliaMetadata, _aureliaValidation, _validate2) {
+define(['exports', 'moment', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], function (exports, _moment, _aureliaMetadata, _aureliaValidation, _validate2) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -21,6 +21,8 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
   exports.url = url;
   exports.numericality = numericality;
   exports.configure = configure;
+
+  var _moment2 = _interopRequireDefault(_moment);
 
   var _validate3 = _interopRequireDefault(_validate2);
 
@@ -286,6 +288,16 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
   var Validator = exports.Validator = function () {
     function Validator() {
       
+
+      _validate3.default.extend(_validate3.default.validators.datetime, {
+        parse: function parse(value, options) {
+          return +_moment2.default.utc(value);
+        },
+        format: function format(value, options) {
+          var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+          return _moment2.default.utc(value).format(format);
+        }
+      });
     }
 
     Validator.prototype._validate = function _validate(object) {
@@ -336,7 +348,7 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
       var errors = [];
       var result = (0, _validate3.default)(object, validator);
       if (result) {
-        errors.push(new _aureliaValidation.ValidationError(null, result[object.key][0], object));
+        errors.push(new _aureliaValidation.ValidationError(null, result[object.propertyName][0], object));
       }
       return errors;
     };
@@ -345,7 +357,6 @@ define(['exports', 'aurelia-metadata', 'aurelia-validation', 'validate.js'], fun
   }();
 
   function configure(config) {
-    debugger;
     config.container.registerInstance(_aureliaValidation.Validator, new Validator());
   }
 });
